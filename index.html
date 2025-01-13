@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Bingro !</title>
+    <title>Bingo Grid with Images</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@
     </style>
 </head>
 <body>
-    <h1>Le Bingro !</h1>
+    <h1>Bingo Grid with Images</h1>
     <table id="bingoGrid"></table>
     <button onclick="generateGrid()">Generate New Grid</button>
     <div id="bingoMessage">BINGO!</div>
@@ -63,13 +63,18 @@
             bingoMessage.style.display = 'none'; // Hide the BINGO message
             grid.innerHTML = ''; // Clear the grid
 
+            // Generate a shuffled list of unique numbers from 1 to 100
+            const numbers = Array.from({ length: 56 }, (_, i) => i + 1);
+            const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
+
+            let index = 0;
             for (let i = 0; i < rows; i++) {
                 const row = document.createElement('tr');
                 for (let j = 0; j < cols; j++) {
                     const cell = document.createElement('td');
-                    const randomNumber = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+                    const randomNumber = shuffledNumbers[index++]; // Get a unique number
                     const img = document.createElement('img');
-                    img.src = `${imagePath}image${randomNumber}${imageExtension}`;
+                    img.src = `${imagePath}${randomNumber}${imageExtension}`;
                     img.alt = `Image ${randomNumber}`;
 
                     // Add click event to change the background color
