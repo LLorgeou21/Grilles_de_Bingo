@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Grid with Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        td {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #000;
+            text-align: center;
+            vertical-align: middle;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+        td.clicked {
+            background-color: green;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #bingoMessage {
+            display: none;
+            font-size: 24px;
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bingo Grid with Images</h1>
+    <table id="bingoGrid"></table>
+    <button onclick="generateGrid()">Generate New Grid</button>
+    <div id="bingoMessage">BINGO!</div>
+
+    <script>
+        // Assuming you have 100 images named 'image1.png', 'image2.png', ..., 'image100.png' in the 'images' folder
+        const imagePath = 'images/';
+        const imageExtension = '.png';
+
+        function generateGrid() {
+            const rows = 3;
+            const cols = 5;
+            const grid = document.getElementById('bingoGrid');
+            const bingoMessage = document.getElementById('bingoMessage');
+            bingoMessage.style.display = 'none'; // Hide the BINGO message
+            grid.innerHTML = ''; // Clear the grid
+
+            for (let i = 0; i < rows; i++) {
+                const row = document.createElement('tr');
+                for (let j = 0; j < cols; j++) {
+                    const cell = document.createElement('td');
+                    const randomNumber = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+                    const img = document.createElement('img');
+                    img.src = `${imagePath}image${randomNumber}${imageExtension}`;
+                    img.alt = `Image ${randomNumber}`;
+
+                    // Add click event to change the background color
+                    cell.onclick = function() {
+                        cell.classList.toggle('clicked');
+                        checkBingo();
+                    };
+
+                    cell.appendChild(img);
+                    row.appendChild(cell);
+                }
+                grid.appendChild(row);
+            }
+        }
+
+        function checkBingo() {
+            const cells = document.querySelectorAll('#bingoGrid td');
+            const allClicked = Array.from(cells).every(cell => cell.classList.contains('clicked'));
+            if (allClicked) {
+                document.getElementById('bingoMessage').style.display = 'block';
+            }
+        }
+
+        // Generate the initial grid when the page loads
+        window.onload = generateGrid;
+    </script>
+</body>
+</html>
