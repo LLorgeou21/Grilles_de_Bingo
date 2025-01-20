@@ -16,12 +16,13 @@
         }
         td {
             width: 60px;
-            height: 60px;
+            height: 80px; /* Increased height to accommodate the name */
             border: 1px solid #000;
             text-align: center;
-            vertical-align: middle;
+            vertical-align: top;
             background-color: #f9f9f9;
             cursor: pointer;
+            padding: 5px;
         }
         td.clicked {
             background-color: green;
@@ -42,6 +43,10 @@
             color: red;
             margin-top: 20px;
         }
+        .name {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -51,19 +56,115 @@
     <div id="bingoMessage">BINGO!</div>
 
     <script>
-        // Assuming you have 100 images named 'image1.png', 'image2.png', ..., 'image100.png' in the 'images' folder
+        const data_3a = [
+            { name: "Alexis", img: "1.png" },
+            { name: "Tony", img: "2.png" },
+            { name: "Antoine", img: "3.png" },
+            { name: "Hugo", img: "4.png" },
+            { name: "Lilian", img: "5.png" },
+            { name: "Lauryne", img: "6.png" },
+            { name: "Emma", img: "7.png" },
+            { name: "Mathis", img: "8.png" },
+            { name: "Emilie", img: "9.png" },
+            { name: "Alexis", img: "10.png" },
+            { name: "Nathan", img: "11.png" },
+            { name: "Florin", img: "12.png" },
+            { name: "Loîs", img: "13.png" },
+            { name: "Louis", img: "14.png" },
+            { name: "Léa", img: "15.png" },
+            { name: "Vincent", img: "16.png" },
+            { name: "Nicolas", img: "17.png" },
+            { name: "Daria", img: "18.png" },
+            { name: "Alex", img: "19.png" },
+            { name: "Lucile", img: "20.png" },
+            { name: "Hugo", img: "21.png" },
+            { name: "Nathan", img: "22.png" },
+            { name: "Matthieu", img: "23.png" },
+            { name: "Enzo", img: "24.png" },
+            { name: "Rorolerigolo", img: "25.png" },
+            { name: "Alinnovlab", img: "26.png" },
+            { name: "Beubeu", img: "27.png" },
+            { name: "Jelil", img: "28.png" },
+            { name: "Tim", img: "29.png" },
+            { name: "Lucas", img: "30.png" },
+            { name: "Margot", img: "31.png" },
+            { name: "Even", img: "32.png" },
+            { name: "Mathilde", img: "33.png" },
+            { name: "Elsa", img: "34.png" },
+            { name: "Léa", img: "35.png" },
+            { name: "Nathan", img: "36.png" },
+            { name: "Ali", img: "37.png" },
+            { name: "Amal", img: "38.png" },
+            { name: "Axelle", img: "39.png" },
+            { name: "Kilian", img: "40.png" },
+            { name: "Emma", img: "41.png" },
+            { name: "Boutayna", img: "42.png" },
+            { name: "Clotilde", img: "43.png" },
+            { name: "Juliette", img: "44.png" },
+            { name: "Quentin", img: "45.png" },
+            { name: "Elsa", img: "46.png" },
+            { name: "Guilhem", img: "47.png" },
+            { name: "Bastian", img: "48.png" },
+            { name: "Loic", img: "49.png" },
+            { name: "JR", img: "50.png" },
+            { name: "Johan", img: "51.png" },
+            { name: "Félix", img: "52.png" },
+            { name: "Marie", img: "53.png" },
+            { name: "Aurélien", img: "54.png" },
+            { name: "Chloé", img: "55.png" },
+            { name: "Lauryne", img: "56.png" },
+            { name: "Antonin", img: "57.png" },
+            { name: "Clémentine", img: "58.png" },
+            { name: "Julia", img: "59.png" },
+            { name: "Leila", img: "60.png" },
+            { name: "Jade", img: "61.png" },
+            { name: "Nathan", img: "62.png" },
+            { name: "Martin", img: "63.png" },
+            { name: "Nicolas", img: "64.png" },
+            { name: "Timothée", img: "65.png" },
+            { name: "Dorian", img: "66.png" },
+            { name: "Zaïd", img: "67.png" },
+            { name: "Lucas", img: "68.png" },
+            { name: "Alexander", img: "69.png" },
+            { name: "Nicolas", img: "70.png" },
+            { name: "Benji", img: "71.png" },
+            { name: "Oumarou", img: "72.png" },
+            { name: "Maugère", img: "73.png" },
+            { name: "Ethan", img: "74.png" },
+            { name: "Nicolas", img: "75.png" },
+            { name: "PG", img: "76.png" },
+            { name: "Roméo", img: "77.png" },
+            { name: "Déline", img: "78.png" },
+            { name: "Rachel", img: "79.png" },
+            { name: "Pierre", img: "80.png" },
+            { name: "Tom", img: "81.png" },
+            { name: "Sacha", img: "82.png" },
+            { name: "Martin", img: "83.png" },
+            { name: "Paul", img: "84.png" },
+            { name: "Julie", img: "85.png" },
+            { name: "Yasmine", img: "86.png" },
+            { name: "Clémence", img: "87.png" },
+            { name: "leena", img: "88.png" },
+            { name: "Haiko", img: "89.png" },
+            { name: "Marie", img: "90.png" },
+            { name: "bg", img: "91.png" },
+            { name: "Cecile", img: "92.png" },
+            { name: "Louis", img: "93.png" },
+            { name: "Samuel", img: "94.png" },
+        ];
+
         const imagePath = 'images/';
         const imageExtension = '.png';
 
         function generateGrid() {
             const rows = 3;
-            const cols = 5  ;
+            const cols = 5;
             const grid = document.getElementById('bingoGrid');
             const bingoMessage = document.getElementById('bingoMessage');
             bingoMessage.style.display = 'none'; // Hide the BINGO message
             grid.innerHTML = ''; // Clear the grid
 
-            // Generate a shuffled list of unique numbers from 1 to 100
+            // Generate a shuffled list of unique numbers from 1 to 94
             const numbers = Array.from({ length: 94 }, (_, i) => i + 1);
             const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
 
@@ -73,6 +174,12 @@
                 for (let j = 0; j < cols; j++) {
                     const cell = document.createElement('td');
                     const randomNumber = shuffledNumbers[index++]; // Get a unique number
+                    const person = data_3a.find(p => p.img === `${randomNumber}.png`);
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'name';
+                    nameDiv.textContent = person.name;
+
                     const img = document.createElement('img');
                     img.src = `${imagePath}${randomNumber}${imageExtension}`;
                     img.alt = `Image ${randomNumber}`;
@@ -83,6 +190,7 @@
                         checkBingo();
                     };
 
+                    cell.appendChild(nameDiv);
                     cell.appendChild(img);
                     row.appendChild(cell);
                 }
